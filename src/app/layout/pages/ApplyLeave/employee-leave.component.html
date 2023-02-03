@@ -1,0 +1,165 @@
+<!-- <app-table [headArray]="headArray" [gridArray]="leavesArray" [heading]="'My Leaves'"
+  (Onadd)="onModalOpen()"></app-table> -->
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <div class="row align-item-center">
+            <div class="col-lg-6 mt-2">
+              <h6>Leaves</h6>
+            </div>
+            <div class="col-lg-6 text-end">
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addClientModal" (click)="Add()">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-dark table-hover">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>EmployeeId</th>
+                <th (click)="sort('FromDate')">FromDate</th>
+                <th (click)="sort('ToDate')">ToDate</th>
+                <th (click)="sort('IsHalfDay')">IsHalfDay</th>
+                <th (click)="sort('NoOfDays')">NoOfDays</th>
+                <th (click)="sort('LeaveType')">LeaveType</th>
+                <th (click)="sort('Details')">Details</th>
+                <th (click)="sort('ApprovedDate')">ApprovedDate</th>
+                <th (click)="sort('IsApproved')">IsApproved</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of leavesArray; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ item.EmployeeId }}</td>
+                <td>{{ item.FromDate | date : "dd/MM/yyyy" }}</td>
+                <td>{{ item.ToDate | date : "dd/MM/yyyy" }}</td>
+                <td>{{ item.IsHalfDay ? "Yes" : "No" }}</td>
+                <td>{{ item.NoOfDays }}</td>
+                <td>{{ item.LeaveType }}</td>
+                <td>{{ item.Details }}</td>
+                <td>{{ item.ApprovedDate | date : "dd/MM/yyyy" }}</td>
+                <td>
+                  {{ item.IsApproved == true ? "Approved" : "NotApproved" }}
+                </td>
+                <!-- <td>
+                    <button class="btn btn-warning" *ngIf="item.IsApproved==false" (click)="ApproveLeave(item.LeaveId)">Approve</button>
+                  </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="addClientModal">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-warning pt-2 pb-2">
+        <h6 class="modal-title w-100">Leaves</h6>
+        <button type="button" class="btn-close" (click)="onModalClose()" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10 pl-1 pr-1">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header bg-info">
+                      <h6>Apply For Leaves</h6>
+                    </div>
+                    <div class="card-body">
+                      <form action="" #form="ngForm">
+                        <div class="row">
+                          <div class="col-md">
+                            <label for="">FromDate</label>
+                            <input type="date" name="FromDate" id="" [(ngModel)]="leavesObj.FromDate"
+                              #FromDate="ngModel" class="form-control" required />
+                            <div class="" *ngIf="FromDate.touched">
+                              <span class="text-danger" *ngIf="FromDate.errors?.['required']">FromDate is
+                                Required</span>
+                            </div>
+                          </div>
+                          <div class="col-md">
+                            <label for="">ToDate</label>
+                            <input type="date" name="ToDate" id="" [(ngModel)]="leavesObj.ToDate" #ToDate="ngModel"
+                              class="form-control" required />
+                            <div class="" *ngIf="ToDate.touched">
+                              <span class="text-danger" *ngIf="ToDate.errors?.['required']">ToDate is Required</span>
+                            </div>
+                          </div>
+                          <div class="col-md mt-4">
+                            <label for="">IsHalfDay</label>&nbsp;
+                            <input type="checkbox" name="IsHalfDay" id="" [(ngModel)]="leavesObj.IsHalfDay"
+                              class="form-check-input" />
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-md">
+                            <label for="">No Of Days</label>
+                            <input type="text" name="NoOfDays" id="" [(ngModel)]="leavesObj.NoOfDays"
+                              class="form-control" />
+                          </div>
+                          <div class="col-md">
+                            <label for="">LeaveType</label>
+                            <input type="text" name="LeaveType" id="" [(ngModel)]="leavesObj.LeaveType"
+                              #LeaveType="ngModel" required class="form-control" />
+                            <div class="" *ngIf="LeaveType.touched">
+                              <span class="text-danger" *ngIf="LeaveType.errors?.['required']">LeaveType is
+                                Required</span>
+                            </div>
+                          </div>
+                          <div class="col-md mt-4">
+                            <label for="">IsApproved</label>&nbsp;
+                            <input type="checkbox" name="IsApproved" value="yes" id=""
+                              [(ngModel)]="leavesObj.IsApproved" class="form-check-input" />
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col-md">
+                            <label for="">ApprovedDate</label>
+                            <input type="date" name="ApprovedDate" id="" [(ngModel)]="leavesObj.ApprovedDate"
+                              class="form-control" />
+                          </div>
+                          <div class="col-md">
+                            <label for="">Details</label>
+                            <textarea name="Details" id="" [(ngModel)]="leavesObj.Details" class="form-control"
+                              #Details="ngModel" cols="10" rows="5" required></textarea>
+                            <div class="" *ngIf="Details.touched">
+                              <span class="text-danger" *ngIf="Details.errors?.['required']">Details is Required</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row mt-2">
+                          <div class="col">
+                            <button class="btn btn-success me-2" (click)="AddLeave()" [disabled]="form.invalid">
+                              Add
+                            </button>
+                            <button class="btn btn-danger" (click)="OnCancel()">
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

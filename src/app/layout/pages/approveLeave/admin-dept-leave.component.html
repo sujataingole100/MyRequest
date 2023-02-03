@@ -1,0 +1,55 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <div class="row align-item-center">
+            <div class="col-lg-6 mt-2">
+              <h6>Leaves</h6>
+            </div>
+            <div class="col-lg-6 text-end">
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addClientModal"
+                (click)="Add()">Add</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-dark table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>EmployeeId</th>
+                <th>FromDate</th>
+                <th>ToDate</th>
+                <th>IsHalfDay</th>
+                <th>NoOfDays</th>
+                <th>LeaveType</th>
+                <th>Details</th>
+                <th>ApprovedDate</th>
+                <th>IsApproved</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of leavesArray;let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{item.EmployeeId}}</td>
+                <td>{{item.FromDate|date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.ToDate|date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.IsHalfDay?'Yes':'No'}}</td>
+                <td>{{item.NoOfDays}}</td>
+                <td>{{item.LeaveType}}</td>
+                <td>{{item.Details}}</td>
+                <td>{{item.ApprovedDate}}</td>
+                <td>{{item.IsApproved==true?'Approved':'NotApproved'}}</td>
+                <td>
+                  <button class="btn btn-warning" (click)="ApproveLeave(item.LeaveId)">Approve</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

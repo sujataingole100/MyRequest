@@ -1,0 +1,130 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <form action="">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <label for="">RequestNo</label>
+                <input type="text" name="RequestNo" id="" class="form-control"
+                  [(ngModel)]="RequestByFilterObj.RequestNo">
+              </td>
+              <td>
+                <label for="">EmployeeId</label>
+                <!-- <input type="text" name="EmployeeId" id="" class="form-control" [(ngModel)]="RequestByFilterObj.EmployeeId"> -->
+                <select name="EmployeeId" id="" class="form-control" [(ngModel)]="RequestByFilterObj.EmployeeId">
+                  <option [value]="item.EmployeeId" *ngFor="let item of AllempArray">{{item.EmployeeName}}</option>
+                </select>
+              </td>
+              <td>
+                <label for="">AssignedTo</label>
+                <!-- <input type="text" name="AssignedTo" id="" class="form-control" [(ngModel)]="RequestByFilterObj.AssignedTo"> -->
+                <select name="AssignedTo" id="" class="form-control" [(ngModel)]="RequestByFilterObj.AssignedTo">
+                  <option [value]="item.EmployeeId" *ngFor="let item of AllempArray">{{item.EmployeeName}}</option>
+                </select>
+              </td>
+              <td>
+                <button class="btn btn-info mt-4" (click)="GetRequestByFilter()">Filter</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <div class="row align-item-center">
+            <div class="col-lg-6 mt-2">
+              <h6>Request List</h6>
+            </div>
+            <div class="col-lg-6 text-end">
+              <!-- <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addClientModal"
+                (click)="Add()">Add</button> -->
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-dark table-bordered table-hover">
+            <thead class="text-center">
+              <tr>
+                <th>Sr No</th>
+                <th (click)="sort('RequestNo')">RequestNo</th>
+                <th (click)="sort('State')">State</th>
+                <th (click)="sort('CreatedDate')">CreatedDate</th>
+                <th (click)="sort('Severity')">Severity</th>
+                <th (click)="sort('CompletedDate')">CompletedDate</th>
+                <th (click)="sort('AssignedUserName')">AssignedUserName</th>
+                <th (click)="sort('EmployeeName')">EmployeeName</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of requestList;let i=index;">
+                <td>{{i+1}}</td>
+                <td>{{item.RequestNo}}</td>
+                <td>{{item.State}}</td>
+                <td>{{item.CreatedDate | date : "dd.MM.y"}}</td>
+                <td>{{item.Severity}}</td>
+                <td>{{item.CompletedDate |date : "dd.MM.y"}}</td>
+                <td *ngIf='item.AssignedUserName !== "--"'>{{item.AssignedUserName}}</td>
+                <td>{{item.EmployeeName}}</td>
+                <td class="text-center" *ngIf='item.AssignedUserName == "--"'>
+                  <button class="btn btn-warning text-center" data-bs-toggle="modal" data-bs-target="#addClientModal"
+                    (click)="Assign(item)">Assign</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal" id="addClientModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-warning pt-2 pb-2">
+        <h6 class="modal-title w-100">Assign Request</h6>
+        <button type="button" class="btn-close" (click)="onModalClose()" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-11 pl-1 pr-1">
+            <form action="">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">RequestId</label>
+                  <input type="text" name="RequestId" id="" [(ngModel)]="requestObj.RequestId" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label for="">AssignedTo</label>
+                  <select name="AssignedTo" id="" [(ngModel)]="requestObj.AssignedTo" class="form-control"
+                    (click)="getEmployeeByDeptId()">
+                    <option value="Select" selected>Select</option>
+                    <option *ngFor="let item of empArray" [value]="item.EmployeeId">{{item.EmployeeName}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <button class="btn btn-success" (click)="AssignRequest()">Assign User</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

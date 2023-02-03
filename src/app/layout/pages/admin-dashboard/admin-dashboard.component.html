@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <div class="row mt-4" *ngFor="let item of dashArray">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totEmp}}</h4>
+              <p class="text-white mb-0">Total Employee</p>
+            </div>
+            <div class="ms-auto">
+              <i class="bi bi-person-circle fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-5c31d6">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totDept}}</h4>
+              <p class="text-white mb-0">Total Department</p>
+            </div>
+            <div class="ms-auto">
+              <i class="fa-solid fa-check fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-fe5957">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totUsers}}</h4>
+              <p class="text-white mb-0">Total Users</p>
+            </div>
+            <div class="ms-auto">
+              <i class="bi bi-person-circle fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-fec107">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totRequest}}</h4>
+              <p class="text-white mb-0">Total Request</p>
+            </div>
+            <div class="ms-auto">
+              <i class="fa-solid fa-list fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngFor="let item of dashArray">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.todaysReq}}</h4>
+              <p class="text-white mb-0">Todays Request</p>
+            </div>
+            <div class="ms-auto">
+              <i class="bi bi-person-circle fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-5c31d6">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totCompleted}}</h4>
+              <p class="text-white mb-0">Total Request Completed</p>
+            </div>
+            <div class="ms-auto">
+              <i class="fa-solid fa-check fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-fe5957">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totOpen}}</h4>
+              <p class="text-white mb-0">Total Request Open</p>
+            </div>
+            <div class="ms-auto">
+              <i class="bi bi-person-circle fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0 bg-fec107">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totCompletedToday}}</h4>
+              <p class="text-white mb-0">Total Request Completed Today</p>
+            </div>
+            <div class="ms-auto">
+              <i class="fa-solid fa-list fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4" *ngFor="let item of dashArray">
+    <div class="col-lg-3 col-sm-6">
+      <div class="card single-widgets-two border-0">
+        <div class="card-body p-0">
+          <div class="d-flex align-items-center">
+            <div class="text-white">
+              <h4 class="mb-0">{{item.totOpenToday}}</h4>
+              <p class="text-white mb-0">Todays Request Open Today</p>
+            </div>
+            <div class="ms-auto">
+              <i class="bi bi-person-circle fs-2 text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

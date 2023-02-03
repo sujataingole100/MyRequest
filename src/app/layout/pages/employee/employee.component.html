@@ -1,0 +1,127 @@
+<form action="">
+  <div class="row ms-2">
+    <div class="col-md-2">
+      <label for="">Filter</label>
+      <input type="text" name="search" id="" [(ngModel)]="search" (ngModelChange)="OnFilter($event)" class="form-control">
+    </div>
+  </div>
+  </form>
+
+<app-table [headArray]="headArray" [gridArray]="FilteredEmployeArray" (OnEdit)="editEmployee($event)"
+  (OnDelete)="deleteEmployee($event)" (Onadd)="onModalOpen()" [heading]="'Employee'"></app-table>
+
+<!-- The Modal -->
+<div class="modal" id="addClientModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header bg-warning pt-2 pb-2">
+        <h6 class="modal-title w-100">Add Employee</h6>
+        <button type="button" class="btn-close" (click)="onModalClose()" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-11 pl-1 pr-1">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <form #form="ngForm">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="">Empoyee Name</label>
+                        <input type="text" name="EmployeeName" id="" [(ngModel)]="EmployeeObj.EmployeeName"
+                          class="form-control" #EmployeeName="ngModel" required>
+                        <div class="" *ngIf="EmployeeName.touched">
+                          <span class="text-danger" *ngIf="EmployeeName.errors?.['required']">EmployeeName is
+                            Required</span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Conact No</label>
+                        <input type="text" name="ContactNo" id="" [(ngModel)]="EmployeeObj.ContactNo"
+                          class="form-control" #ContactNo="ngModel" required>
+                        <div class="" *ngIf="ContactNo.touched">
+                          <span class="text-danger" *ngIf="ContactNo.errors?.['required']">ContactNo is Required</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-6">
+                        <label for="">Email Id</label>
+                        <input type="text" name="EmailId" id="" [(ngModel)]="EmployeeObj.EmailId" class="form-control"
+                          #EmailId="ngModel" required>
+                        <div class="" *ngIf="EmailId.touched">
+                          <span class="text-danger" *ngIf="EmailId.errors?.['required']">EmailId is Required</span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Role</label>
+                        <input type="text" name="Role" id="" [(ngModel)]="EmployeeObj.Role" class="form-control"
+                          #Role="ngModel" required>
+                        <div class="" *ngIf="Role.touched">
+                          <span class="text-danger" *ngIf="Role.errors?.['required']">Role is Required</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="">User Name</label>
+                        <input type="text" name="UserName" id="" [(ngModel)]="EmployeeObj.UserName" class="form-control"
+                          #UserName="ngModel" required>
+                        <div class="" *ngIf="UserName.touched">
+                          <span class="text-danger" *ngIf="UserName.errors?.['required']">UserName is Required</span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Password</label>
+                        <input type="password" name="Password" id="" [(ngModel)]="EmployeeObj.Password"
+                          #Password="ngModel" required class="form-control">
+                        <div class="" *ngIf="Password.touched">
+                          <span class="text-danger" *ngIf="Password.errors?.['required']">Password is Required</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-2">
+                      <div class="col-md-6">
+                        <label for="">Department Name</label>
+                        <select name="selectedDet" id="" placeholder="Department Name" [(ngModel)]="EmployeeObj.DeptId"
+                          class="form-control" (change)="selectDept()" #DeptId="ngModel" required>
+                          <option value="Select" selected>Select</option>
+                          <option [value]="item.DeptId" *ngFor="let item of deptArray">{{item.DeptName}}</option>
+                        </select>
+                        <div class="" *ngIf="DeptId.touched">
+                          <span class="text-danger" *ngIf="DeptId.errors?.['required']">DeptId is Required</span>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="">Reports To</label>
+                        <select name="ReportsTo" id="" placeholder="ReportsTo" [(ngModel)]="EmployeeObj.ReportsTo"
+                          #ReportsTo="ngModel" required class="form-control">
+                          <option value="Select" selected>Select</option>
+                          <option [value]="item.DeptId" *ngFor="let item of empByDeptArray">{{item.EmployeeName}}
+                          </option>
+                        </select>
+                        <div class="" *ngIf="ReportsTo.touched">
+                          <span class="text-danger" *ngIf="ReportsTo.errors?.['required']">ReportsTo is Required</span>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row mt-3">
+                      <div class="col">
+                        <button class="btn btn-success" (click)="AddEmployee()" *ngIf="EmployeeObj.EmployeeId===0"
+                          [disabled]="form.invalid">Add</button>
+                        <button class="btn btn-success" (click)="updateEmployee()"
+                          *ngIf="EmployeeObj.EmployeeId!==0">Update</button>
+                        <button class="btn btn-danger ms-2" (click)="clear()">Clear</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal end -->

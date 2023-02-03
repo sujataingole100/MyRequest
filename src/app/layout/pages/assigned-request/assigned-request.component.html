@@ -1,0 +1,79 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <div class="row align-item-center">
+            <div class="col-md-12 mt-2">
+              <h6>My Request</h6>
+            </div>
+
+          </div>
+        </div>
+        <div class="card-body">
+          <table class="table table-dark table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>RequestNo</th>
+                <th>State</th>
+                <th>CreatedDate</th>
+                <th>ExpectedEndDate</th>
+                <th>Severity</th>
+                <th>EmployeeName</th>
+                <th>DeptName</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of myrequest; let i=index;">
+                <td>{{i+1}}</td>
+                <td> {{item.RequestNo}}</td>
+                <td>{{item.State}}</td>
+                <td>{{item.CreatedDate}}</td>
+                <td>{{item.ExpectedEndDate}}</td>
+                <td>{{item.Severity}}</td>
+                <td>{{item.EmployeeName}}</td>
+                <td>{{item.DeptName}}</td>
+                <td>
+                  <button class="btn btn-info" (click)="OpenRequest(item)">Open</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div class="modal" id="addClientModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header bg-warning pt-2 pb-2">
+        <h6 class="modal-title w-100">Request Status</h6>
+        <button type="button" class="btn-close" (click)="onModalClose()" data-bs-dismiss="modal"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-11 pl-1 pr-1">
+            <div class="card">
+              <div class="card-body">
+                <label for="">Select State</label>
+                <select name="state" id="" [(ngModel)]="state" class="form-control" placeholder="Select State"
+                  (change)="ChangeStatus()">
+                  <option selected="selected">Select</option>
+                  <option value="In-Progress">In-Progress</option>
+                  <option value="Close">Close</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

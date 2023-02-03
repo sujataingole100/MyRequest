@@ -1,0 +1,44 @@
+<div class="area"></div>
+
+<nav class="main-menu"
+  [ngClass]="userRole=='admin'?'navbar-dark bg-dark':'' || userRole=='dminDept'?'navbar-dark bg-success text-white':'' || userRole=='Employee'?'navbar-dark bg-dark text-white':''">
+  <ul>
+    <!-- <li class="fa">
+      <img src="assets/lo_logo.png" alt="" class="logo1 mb-4">
+         </li> -->
+    <li class="mt-4" *ngFor="let route of filteredRoutesArray">
+      <a class="mb-4" class="mb-4" routerLinkActive="active" routerLink={{route.path}}>
+        <i class="{{route.icon}}"></i>
+        <span class="nav-text">
+          {{route.text}}
+        </span>
+      </a>
+    </li>
+  </ul>
+
+</nav>
+
+<div class="card ms-5">
+  <div class="card-header bg-info">
+    <div class="row">
+      <div class="col-md-10">
+        <h6>My Request</h6>
+      </div>
+      <div class="col-md-2">
+        <div class="row ">
+          <div class="col-md-5 text-end mb-2">
+            <span class="text-dark text-success fw-bold">{{logedinUserName|uppercase}}</span>
+          </div>
+          <div class="col-md-7">
+            <button class="btn btn-primary btn-sm" (click)="logout();"><i
+                class="bi bi-box-arrow-right me-1"></i>LOGOUT</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="card-body" style="background-color:gainsboro">
+    <router-outlet></router-outlet>
+  </div>
+</div>
